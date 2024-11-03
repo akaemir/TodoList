@@ -2,10 +2,11 @@
 using System.Text.Json;
 using Core.Exceptions;
 using Core.Responses;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace TodoList.API.Middlewares;
 
-public class GlobalExceptionHandler
+public class GlobalExceptionHandler : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
         CancellationToken cancellationToken)

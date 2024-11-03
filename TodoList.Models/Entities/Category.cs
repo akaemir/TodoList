@@ -1,8 +1,9 @@
+using Core.Entities;
+
 namespace TodoList.Models.Entities;
 
-public class Category
+public sealed class Category : Entity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public List<Todo> Todos { get; set; }
 }
