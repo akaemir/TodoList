@@ -16,6 +16,7 @@ public static class ServiceDependencies
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<TodoBusinessRules>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();

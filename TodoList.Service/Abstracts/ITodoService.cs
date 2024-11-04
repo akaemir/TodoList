@@ -1,6 +1,8 @@
+using Core.Repositories;
 using Core.Responses;
 using TodoList.Models.Dtos.ToDos.Requests;
 using TodoList.Models.Dtos.ToDos.Responses;
+using TodoList.Models.Entities;
 
 namespace TodoList.Service.Abstracts;
 

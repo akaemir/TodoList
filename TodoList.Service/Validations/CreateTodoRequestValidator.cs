@@ -12,6 +12,6 @@ public class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest>
         RuleFor(x => x.Description).NotEmpty().WithMessage("Görev açıklaması boş olamaz!")
             .Length(5,100).WithMessage("Görev açıklaması minimum 5 karakter ve maksimum 100 karakter 100 karakter olmalıdır!");
         RuleFor(x=> x.StartDate).NotEmpty().WithMessage("Başlangıç tarihi boş olamaz!")
-            .LessThan(DateTime.Now.AddMinutes(-1)).WithMessage("Geçmiş zaman tarihi olamaz!");
+            .LessThan(DateTime.Now.AddMinutes(1)).WithMessage("Geçmiş zaman tarihi olamaz!");
     }
 }

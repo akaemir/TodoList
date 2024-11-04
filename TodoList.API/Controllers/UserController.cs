@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Models.Dtos.Users.Requests;
 using TodoList.Service.Abstracts;
@@ -15,8 +16,7 @@ public class UserController(IUserService _userService, IAuthenticationService _a
 
         return Ok(result);
     }
-
-
+    [Authorize(Roles = "Admin")]
     [HttpGet("getbyemail")]
     public async Task<IActionResult> GetByEmail([FromQuery] string email)
     {

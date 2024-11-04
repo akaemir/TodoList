@@ -1,6 +1,6 @@
 namespace TodoList.Models.Dtos.Categories.Requests;
 
-public class UpdateCategoryRequest(
-    int categoryId,
-    string CategoryName
+public sealed record UpdateCategoryRequest(
+    int Id,
+    string Name
     );
