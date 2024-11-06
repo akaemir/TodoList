@@ -127,14 +127,19 @@ public class UserServiceTest
         public async Task ChangePasswordAsync_ShouldThrowBusinessException_WhenPasswordsDoNotMatch()
         {
             // Arrange
-            var changePasswordDto = new ChangePasswordRequestDto("OldPassword123!",
-                "NewPassword123!",
-                "NewPassword123!");
+            var userId = "validUserId";
+            var requestDto = new ChangePasswordRequestDto("OldPassword123", "NewPassword123", "DifferentPassword123");
+
+            // Mock user retrieval to return a valid user
+            var user = new User { Id = userId, UserName = "testuser" };
+            _userManagerMock.Setup(u => u.FindByIdAsync(userId))
+                .ReturnsAsync(user); // Simulate user exists
 
             // Act & Assert
-            var ex = Assert.ThrowsAsync<BusinessException>(() =>
-                _userService.ChangePasswordAsync("64bc7198-d5ca-45a6-ae6e-8ffbfee81fea", changePasswordDto));
-            Assert.AreEqual("Parola Uyuşmuyor.", ex.Message);
+            var exception = Assert.ThrowsAsync<BusinessException>(async () =>
+                await _userService.ChangePasswordAsync(userId, requestDto));
+
+            Assert.That(exception.Message, Is.EqualTo("Parola Uyuşmuyor.")); // Adjust the message to match your implementation
         }
 
         [Test]

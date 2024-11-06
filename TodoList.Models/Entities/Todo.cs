@@ -13,5 +13,5 @@ public sealed class Todo : Entity<Guid>
     public bool Completed { get; set; }
     public Category Category { get; set; }
     public string UserId { get; set; }
-    public User User{ get; set; }
+    public User User { get; set; }
 }

@@ -10,5 +10,5 @@ public sealed record TodoResponseDto
     public DateTime StartDate { get; init; }
     public DateTime EndDate { get; init; }
     public string Priority { get; init; }
-    public string Category { get; init; }
+    public string CategoryName { get; init; }
 }

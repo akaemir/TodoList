@@ -1,5 +1,5 @@
 namespace TodoList.Models.Dtos.Categories.Requests;
 
 public sealed record CreateCategoryRequest(
-    string CategoryName
+    string Name
     );

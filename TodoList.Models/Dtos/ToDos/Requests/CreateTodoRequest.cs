@@ -1,3 +1,5 @@
+using TodoList.Models.Entities;
+
 namespace TodoList.Models.Dtos.ToDos.Requests;
 
 public sealed record CreateTodoRequest(
@@ -5,6 +7,6 @@ public sealed record CreateTodoRequest(
     string Description,
     DateTime StartDate,
     DateTime EndDate,
-    int priorityId,
-    int categoryId
+    Priority Priority,
+    int CategoryId
     );

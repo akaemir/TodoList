@@ -14,10 +14,12 @@ public static class ServiceDependencies
     {
         services.AddScoped<ITodoService, TodoService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<TodoBusinessRules>();
+        services.AddScoped<CategoryBusinessRules>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

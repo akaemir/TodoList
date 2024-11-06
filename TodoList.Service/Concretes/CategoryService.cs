@@ -6,6 +6,8 @@ using TodoList.Models.Dtos.Categories.Requests;
 using TodoList.Models.Dtos.Categories.Responses;
 using TodoList.Models.Entities;
 using TodoList.Service.Abstracts;
+using TodoList.Service.Constants;
+using TodoList.Service.Rules;
 
 namespace TodoList.Service.Concretes;
 
@@ -13,11 +15,13 @@ public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMapper _mapper;
+    private readonly CategoryBusinessRules _categoryBusinessRules;
 
-    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, CategoryBusinessRules categoryBusinessRules)
     {
         _categoryRepository = categoryRepository;
         _mapper = mapper;
+        _categoryBusinessRules = categoryBusinessRules;
     }
 
     public Task<ReturnModel<CategoryResponseDto>> Add(CreateCategoryRequest create)
@@ -28,7 +32,7 @@ public class CategoryService : ICategoryService
         return Task.FromResult(new ReturnModel<CategoryResponseDto>
         {
             Data = response,
-            Message = "Category eklendi",
+            Message = Messages.CategoryAddedMessage,
             StatusCode = 200,
             Success = true
         });
@@ -50,6 +54,7 @@ public class CategoryService : ICategoryService
 
     public ReturnModel<CategoryResponseDto?> GetById(int id)
     {
+        _categoryBusinessRules.CategoryIsPresent(id);
         Category Category = _categoryRepository.GetById(id);
         CategoryResponseDto response = _mapper.Map<CategoryResponseDto>(Category);
         return new ReturnModel<CategoryResponseDto?>
@@ -63,6 +68,7 @@ public class CategoryService : ICategoryService
 
     public ReturnModel<CategoryResponseDto> Update(UpdateCategoryRequest updateCategory)
     {
+        _categoryBusinessRules.CategoryIsPresent(updateCategory.Id);
         Category category = _categoryRepository.GetById(updateCategory.Id);
         Category update = new Category
         {
@@ -71,11 +77,10 @@ public class CategoryService : ICategoryService
         };
         Category updatedCategory = _categoryRepository.Update(update);
         CategoryResponseDto dto = _mapper.Map<CategoryResponseDto>(updatedCategory);
-
         return new ReturnModel<CategoryResponseDto>
         {
             Data = dto,
-            Message = "Category güncellendi.",
+            Message = Messages.CategoryUpdatedMessage,
             StatusCode = 200,
             Success = true,
         };
@@ -83,13 +88,14 @@ public class CategoryService : ICategoryService
 
     public ReturnModel<CategoryResponseDto> Remove(int id)
     {
+        _categoryBusinessRules.CategoryIsPresent(id);
         Category category = _categoryRepository.GetById(id);
         Category deletedCategory = _categoryRepository.Remove(category);
         CategoryResponseDto response = _mapper.Map<CategoryResponseDto>(deletedCategory);
         return new ReturnModel<CategoryResponseDto>
         {
             Data = response,
-            Message = "Category silindi",
+            Message = Messages.CategoryDeletedMessage,
             StatusCode = 200,
             Success = true,
         };

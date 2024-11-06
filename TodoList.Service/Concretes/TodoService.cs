@@ -34,8 +34,8 @@ public sealed class TodoService : ITodoService
         return Task.FromResult(new ReturnModel<TodoResponseDto>
         {
             Data = response,
-            Message = "Todo eklendi.",
-            StatusCode = 200,
+            Message = Messages.TodoAddedMessage,
+            StatusCode = 201,
             Success = true
         });
     }
@@ -91,7 +91,7 @@ public sealed class TodoService : ITodoService
         return new ReturnModel<TodoResponseDto>
         {
             Data = response,
-            Message = "Görev Güncellendi.",
+            Message = Messages.TodoUpdatedMessage,
             StatusCode = 200,
             Success = true
         };
@@ -133,7 +133,7 @@ public sealed class TodoService : ITodoService
         return new ReturnModel<List<TodoResponseDto>>
         {
             Data = responses,
-            Message = $"Yazar Id sine göre Todolar listelendi : Yazar Id: {authorId}",
+            Message = $"Kullanıcı Id'sine göre Görevler listelendi! Id: {authorId}",
             StatusCode = 200,
             Success = true
         };

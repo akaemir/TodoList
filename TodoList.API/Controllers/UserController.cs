@@ -7,16 +7,9 @@ namespace TodoList.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class UserController(IUserService _userService, IAuthenticationService _authenticationService) : Controller
 {
-    [HttpPost("register")]
-    public async Task<IActionResult> CreateUser([FromBody] RegisterRequestDto dto)
-    {
-        var result = await _authenticationService.RegisterByTokenAsync(dto);
-
-        return Ok(result);
-    }
-    [Authorize(Roles = "Admin")]
     [HttpGet("getbyemail")]
     public async Task<IActionResult> GetByEmail([FromQuery] string email)
     {
@@ -24,12 +17,6 @@ public class UserController(IUserService _userService, IAuthenticationService _a
         return Ok(result);
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequestDto dto)
-    {
-        var result = await _authenticationService.LoginByTokenAsync(dto);
-        return Ok(result);
-    }
 
     [HttpDelete("delete")]
     public async Task<IActionResult> Delete([FromQuery] string id)

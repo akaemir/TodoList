@@ -12,7 +12,8 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<CreateTodoRequest, Todo>();
-        CreateMap<Todo, TodoResponseDto>();
+        CreateMap<Todo, TodoResponseDto>()
+            .ForMember(x => x.CategoryName, cfg => cfg.MapFrom(t => t.Category.Name));
         CreateMap<UpdateTodoRequest, Todo>();
 
         CreateMap<CreateCategoryRequest, Category>();

@@ -16,8 +16,4 @@
       <ProjectReference Include="..\TodoList.Models\TodoList.Models.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Configurations\" />
-    </ItemGroup>
-
 </Project>

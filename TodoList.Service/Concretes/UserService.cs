@@ -27,7 +27,6 @@ public class UserService(UserManager<User> _userManager) : IUserService
         return user;
     }
 
-
     public async Task<string> DeleteAsync(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
@@ -45,7 +44,6 @@ public class UserService(UserManager<User> _userManager) : IUserService
     public async Task<User> GetByEmailAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
-
         if (user is null)
         {
             throw new NotFoundException("Kullanıcı bulunamadı.");
@@ -57,7 +55,6 @@ public class UserService(UserManager<User> _userManager) : IUserService
     public async Task<User> LoginAsync(LoginRequestDto dto)
     {
         var user = await _userManager.FindByEmailAsync(dto.Email);
-
         if (user is null)
         {
             throw new NotFoundException("Kullanıcı bulunamadı.");

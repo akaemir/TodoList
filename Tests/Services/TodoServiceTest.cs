@@ -51,7 +51,7 @@ public class TodoServiceTest
     {
         // Arrange
         var createRequest = new CreateTodoRequest("Test Title", "Test Description", DateTime.Now,
-            DateTime.Now.AddDays(7), 3, 1);
+            DateTime.Now.AddDays(7), Priority.Normal, 1);
         var todo = new Todo
         {
             Id = Guid.NewGuid(),
@@ -61,7 +61,7 @@ public class TodoServiceTest
             StartDate = createRequest.StartDate,
             EndDate = createRequest.EndDate,
             Priority = Priority.Normal,
-            CategoryId = createRequest.categoryId
+            CategoryId = createRequest.CategoryId
         };
         var todoResponseDto = new TodoResponseDto
             { Id = todo.Id, Title = todo.Title, Description = todo.Description };
@@ -75,7 +75,7 @@ public class TodoServiceTest
 
         // Assert
         Assert.IsTrue(result.Success);
-        Assert.AreEqual("Todo eklendi.", result.Message);
+        Assert.AreEqual("Yapılacak iş Eklendi!", result.Message);
         Assert.AreEqual(todoResponseDto, result.Data);
     }
 
@@ -119,7 +119,7 @@ public class TodoServiceTest
 
         // Assert
         Assert.IsTrue(result.Success);
-        Assert.AreEqual("Görev Güncellendi.", result.Message);
+        Assert.AreEqual("Yapılacak iş Güncellendi!", result.Message);
     }
 
     [Test]

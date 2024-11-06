@@ -14,7 +14,6 @@ public class TodoBusinessRules(IToDoRepository _toDoRepository)
         {
             throw new NotFoundException(Messages.TodoIsNotPresentMessage(id));
         }
-
         return true;
     }
 }

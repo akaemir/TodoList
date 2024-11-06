@@ -12,7 +12,6 @@ namespace TodoList.API.Controllers;
 public class CategoryController(ICategoryService _categoryService) : Controller
 {
     [HttpGet("getall")]
-    [Authorize(Roles = "User,Admin")]
     public IActionResult GetAll()
     {
         var result = _categoryService.GetAll();
@@ -25,7 +24,7 @@ public class CategoryController(ICategoryService _categoryService) : Controller
         var result = _categoryService.Add(dto);
         return Ok(result);
     }
-    [Authorize(Roles = "User,Admin")]
+    [Authorize]
     [HttpGet("getbyid/{id}")]
     public IActionResult GetById([FromRoute] int id)
     {
