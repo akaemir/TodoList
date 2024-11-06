@@ -108,6 +108,16 @@ public class UserService(UserManager<User> _userManager) : IUserService
 
         return user;
     }
+    public async Task<User> GetByUserId(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user is null)
+        {
+            throw new NotFoundException("Kullanıcı bulunamadı.");
+        }
+
+        return user;
+    }
 
 
     private void CheckForIdentityResult(IdentityResult result)

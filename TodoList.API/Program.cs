@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddRepositoryDepencdencies(builder.Configuration);
 builder.Services.AddServiceDependenies();
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.Configure<TokenOption>(builder.Configuration.GetSection("TokenOption"));

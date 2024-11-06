@@ -1,3 +1,4 @@
+using Core.Tokens.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Models.Dtos.Users.Requests;
@@ -7,7 +8,7 @@ namespace TodoList.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin")] // User ile ilgili işlemleri sadece admin gerçekleştirebilir.
 public class UserController(IUserService _userService, IAuthenticationService _authenticationService) : Controller
 {
     [HttpGet("getbyemail")]
@@ -16,8 +17,7 @@ public class UserController(IUserService _userService, IAuthenticationService _a
         var result = await _userService.GetByEmailAsync(email);
         return Ok(result);
     }
-
-
+    
     [HttpDelete("delete")]
     public async Task<IActionResult> Delete([FromQuery] string id)
     {
